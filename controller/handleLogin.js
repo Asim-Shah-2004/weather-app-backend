@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 
 const LoginHandler = async (req, res) => {
     const { username, password } = req.body;
-
+    console.log('request came in')
     if (!username || !password) return res.status(400).send({ message: 'Username and password not found' });
 
     try {
@@ -15,7 +15,8 @@ const LoginHandler = async (req, res) => {
 
         if (!result) return res.status(401).send({ message: 'Incorrect password' });
 
-        return res.status(200).send({ message: 'Login successful' });
+         res.status(200).send({ message: 'Login successful' });
+         res.redirect('exp://192.168.21.245:8081/Current');
     } catch (error) {
         console.error('Error during login:', error);
         return res.status(500).send({ message: 'Error during login' });
